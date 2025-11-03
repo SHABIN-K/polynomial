@@ -1,6 +1,11 @@
+import {
+  BrowserRouter as Router,
+  Routes,
+  Route,
+  Navigate,
+} from "react-router-dom";
 import { useEffect, lazy } from "react";
 import { sdk } from "@farcaster/frame-sdk";
-import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-dom";
 
 import MarketsPage from "./pages/MarketsPage";
 const TradePage = lazy(() => import("./pages/TradePage"));
@@ -13,13 +18,14 @@ function App() {
 
   return (
     <Router>
-      <Routes>
-        <Route path="/" element={<MarketsPage />} />
-        <Route path="/trade/:marketSymbol" element={<TradePage />} />
-        <Route path="/positions" element={<PositionsPage />} />
-        {/* Redirect any unknown route */}
-        <Route path="*" element={<Navigate to="/" />} />
-      </Routes>
+      <div className="bg-white min-h-screen">
+        <Routes>
+          <Route path="/" element={<MarketsPage />} />
+          <Route path="/trade/:marketSymbol" element={<TradePage />} />
+          <Route path="/positions" element={<PositionsPage />} />
+          <Route path="*" element={<Navigate to="/" />} />
+        </Routes>
+      </div>
     </Router>
   );
 }

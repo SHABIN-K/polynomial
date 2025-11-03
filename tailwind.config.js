@@ -4,7 +4,7 @@ export default {
   theme: {
     extend: {
       screens: {
-        "mobile-only": { max: "600px" },
+        "mobile-only": { max: "550px" },
       },
     },
   },
