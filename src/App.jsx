@@ -1,6 +1,10 @@
+import { useEffect, lazy } from "react";
 import { sdk } from "@farcaster/frame-sdk";
-import { useEffect } from "react";
-import { useAccount, useConnect, useSignMessage } from "wagmi";
+import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-dom";
+
+import MarketsPage from "./pages/MarketsPage";
+const TradePage = lazy(() => import("./pages/TradePage"));
+const PositionsPage = lazy(() => import("./pages/PositionsPage"));
 
 function App() {
   useEffect(() => {
@@ -8,54 +12,15 @@ function App() {
   }, []);
 
   return (
-    <>
-      <div className="text-2xl font-bold">Mini App + Vite + TS + React + Wagmi</div>
-    </>
-  );
-}
-
-function ConnectMenu() {
-  const { isConnected, address } = useAccount();
-  const { connect, connectors } = useConnect();
-
-  if (isConnected) {
-    return (
-      <>
-        <div>Connected account:</div>
-        <div>{address}</div>
-        <SignButton />
-      </>
-    );
-  }
-
-  return (
-    <button type="button" onClick={() => connect({ connector: connectors[0] })}>
-      Connect
-    </button>
-  );
-}
-
-function SignButton() {
-  const { signMessage, isPending, data, error } = useSignMessage();
-
-  return (
-    <>
-      <button type="button" onClick={() => signMessage({ message: "hello world" })} disabled={isPending}>
-        {isPending ? "Signing..." : "Sign message"}
-      </button>
-      {data && (
-        <>
-          <div>Signature</div>
-          <div>{data}</div>
-        </>
-      )}
-      {error && (
-        <>
-          <div>Error</div>
-          <div>{error.message}</div>
-        </>
-      )}
-    </>
+    <Router>
+      <Routes>
+        <Route path="/" element={<MarketsPage />} />
+        <Route path="/trade/:marketSymbol" element={<TradePage />} />
+        <Route path="/positions" element={<PositionsPage />} />
+        {/* Redirect any unknown route */}
+        <Route path="*" element={<Navigate to="/" />} />
+      </Routes>
+    </Router>
   );
 }
 
