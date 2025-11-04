@@ -1,4 +1,10 @@
-    [[redirects]]
-    from = "/*"
-    to = "/index.html"
-    status = 200
+[[redirects]]
+  from   = "/.well-known/farcaster.json"
+  to     = "https://api.farcaster.xyz/miniapps/hosted-manifest/019a4f20-f8d1-b9bf-c087-2add374e8945"
+  status = 302
+  force  = true
+
+[[redirects]]
+  from   = "/*"
+  to     = "/index.html"
+  status = 200
