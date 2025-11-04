@@ -1,17 +1,8 @@
-import {
-  BrowserRouter as Router,
-  Routes,
-  Route,
-  Navigate,
-} from "react-router-dom";
-import { useEffect, lazy } from "react";
+import { useEffect } from "react";
 import { sdk } from "@farcaster/frame-sdk";
+import { BrowserRouter as Router } from "react-router-dom";
 
-import TopNavBar from "./Components/TopNavBar";
-import MarketsPage from "./pages/MarketsPage";
-import BottomNavBar from "./Components/BottomNavBar";
-const TradePage = lazy(() => import("./pages/TradePage"));
-const PositionsPage = lazy(() => import("./pages/PositionsPage"));
+import AppRoutes from "@/routes/AppRoutes";
 
 function App() {
   useEffect(() => {
@@ -20,17 +11,7 @@ function App() {
 
   return (
     <Router>
-      <div className="relative bg-[#f3f3f3] min-h-screen">
-        <TopNavBar />
-        <BottomNavBar />
-        <Routes>
-          <Route path="/" element={<MarketsPage />} />
-          <Route path="/trade/:marketSymbol" element={<TradePage />} />
-          <Route path="/positions" element={<PositionsPage />} />
-          <Route path="*" element={<Navigate to="/" />} />
-        </Routes>
-
-      </div>
+      <AppRoutes />
     </Router>
   );
 }
