@@ -22,13 +22,14 @@ function App() {
     <Router>
       <div className="relative bg-[#f3f3f3] min-h-screen">
         <TopNavBar />
+        <BottomNavBar />
         <Routes>
           <Route path="/" element={<MarketsPage />} />
           <Route path="/trade/:marketSymbol" element={<TradePage />} />
           <Route path="/positions" element={<PositionsPage />} />
           <Route path="*" element={<Navigate to="/" />} />
         </Routes>
-        <BottomNavBar />
+
       </div>
     </Router>
   );

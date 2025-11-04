@@ -13,10 +13,10 @@ const TopNavBar = () => {
                 </div>
 
                 <div className="flex items-center gap-2">
-                    <div className="p-2 rounded-lg hover:bg-gray-100" title="Wishlist">
+                    <div className="p-2 rounded-lg hover:bg-gray-100">
                         <Eye className="w-6 h-6 text-gray-600" />
                     </div>
-                    <div className="p-2 rounded-lg hover:bg-gray-100" title="Notifications">
+                    <div className="p-2 rounded-lg hover:bg-gray-100">
                         <BellDot className="w-6 h-6 text-gray-600" />
                     </div>
                 </div>
