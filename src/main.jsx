@@ -3,7 +3,7 @@ import { WagmiProvider } from "wagmi";
 import { createRoot } from "react-dom/client";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 
-import App from "./App.jsx";
+import App from "@/App.jsx";
 import { config } from "./lib/wagmi.js";
 
 import "./index.css";

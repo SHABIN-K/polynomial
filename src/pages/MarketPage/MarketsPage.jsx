@@ -1,4 +1,4 @@
-import { TrendingUp, TrendingDown } from "lucide-react"
+import MarketCard from "./Components/MarketCard";
 
 const MarketsPage = () => {
   const assets = [
@@ -84,49 +84,12 @@ const MarketsPage = () => {
     },
   ]
 
-  const getTrendColor = (change) => {
-    return change >= 0 ? "text-green-500" : "text-red-500"
-  }
-
-  const getMiniChart = (trend) => {
-    const points = trend.map((v, i) => `${i * 15},${100 - v}`).join(" ")
-    return (
-      <svg width="60" height="30" viewBox="0 0 90 100" className="w-full h-full">
-        <polyline points={points} fill="none" stroke="currentColor" strokeWidth="2" vectorEffect="non-scaling-stroke" />
-      </svg>
-    )
-  }
-
   return (
-    <div className="bg-black text-white pt-1">
+    <div className="text-white pt-1">
       <div className=""></div>
-      <div className="space-y-3">
+      <div className="flex flex-col">
         {assets.map((asset) => (
-          <div key={asset.id} className="bg-white rounded-lg p-4 border border-gray-100 flex items-center gap-4">
-            {/* Icon Circle */}
-            <div className={`${asset.color} w-12 h-12 rounded-lg flex items-center justify-center flex-shrink-0`}>
-              <span className="text-sm font-bold text-gray-700">{asset.symbol[0]}</span>
-            </div>
-
-            {/* Info */}
-            <div className="flex-1 min-w-0">
-              <div className="flex items-center justify-between mb-1">
-                <h3 className="font-semibold text-gray-900 text-sm">{asset.symbol}</h3>
-                <span className="text-gray-900 font-semibold text-sm">{asset.price}</span>
-              </div>
-              <div className="flex items-center justify-between">
-                <span className={`text-xs flex items-center gap-1 ${getTrendColor(asset.change)}`}>
-                  {asset.change >= 0 ? <TrendingUp size={12} /> : <TrendingDown size={12} />}
-                  {asset.change >= 0 ? "+" : ""}
-                  {asset.change}%
-                </span>
-                <span className="text-gray-500 text-xs">{asset.amount}</span>
-              </div>
-            </div>
-
-            {/* Mini Chart */}
-            <div className={`w-16 h-8 flex-shrink-0 ${getTrendColor(asset.change)}`}>{getMiniChart(asset.trend)}</div>
-          </div>
+          <MarketCard key={asset.id} asset={asset} />
         ))}
       </div>
     </div>

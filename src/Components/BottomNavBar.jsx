@@ -2,7 +2,6 @@ import { clsx } from "clsx";
 import { ChartCandlestick, SendToBack, WalletMinimal, ChartLine } from "lucide-react"
 
 const BottomNavBar = () => {
-
   const navItems = [
     { id: "markets", label: "Markets", icon: ChartCandlestick, path: "/" },
     { id: "orders", label: "Orders", icon: SendToBack, path: "/" },
