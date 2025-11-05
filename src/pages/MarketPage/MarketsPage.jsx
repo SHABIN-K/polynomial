@@ -29,7 +29,7 @@ const MarketsPage = () => {
   }, [showWatchlistOnly, query, watchlist]);
 
   return (
-    <>
+    <div className="py-16">
       <MarketTopNavbar />
       <MarketSearchBar query={query} setQuery={setQuery} />
       <div className="flex flex-col mx-auto">
@@ -42,7 +42,7 @@ const MarketsPage = () => {
         )}
       </div>
       <MarketBottomNavbar />
-    </>
+    </div>
   );
 };
 

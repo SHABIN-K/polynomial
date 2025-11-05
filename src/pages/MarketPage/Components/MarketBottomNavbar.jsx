@@ -4,7 +4,7 @@ import { ChartCandlestick, SendToBack, WalletMinimal, ChartLine } from "lucide-r
 const MarketBottomNavbar = () => {
     const navItems = [
         { id: "markets", label: "Markets", icon: ChartCandlestick, path: "/" },
-        { id: "orders", label: "Orders", icon: SendToBack, path: "/" },
+        { id: "positions", label: "Positions", icon: SendToBack, path: "/positions" },
         { id: "multi-charts", label: "Multi Charts", icon: ChartLine, path: "/" },
         { id: "profile", label: "Profile", icon: WalletMinimal, path: "/" },
     ]
