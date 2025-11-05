@@ -21,7 +21,6 @@ const AppLoader = () => {
                 <div className="w-1 h-6 bg-green-500"></div>
             </div>
         </div>
-
     )
 }
 

@@ -22,7 +22,8 @@
     "react-router-dom": "^7.9.5",
     "react-sparklines": "^1.7.0",
     "viem": "latest",
-    "wagmi": "latest"
+    "wagmi": "latest",
+    "zustand": "^5.0.8"
   },
   "devDependencies": {
     "@biomejs/biome": "^1.8.0",
