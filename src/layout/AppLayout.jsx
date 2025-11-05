@@ -3,7 +3,6 @@ import { Outlet } from 'react-router-dom'
 
 import TopNavBar from '@/Components/TopNavBar'
 import AppLoader from '@/Components/AppLoader'
-import BottomNavBar from '@/Components/BottomNavBar'
 
 const AppLayout = () => {
     return (
@@ -14,7 +13,6 @@ const AppLayout = () => {
                     <Outlet />
                 </Suspense>
             </div>
-            <BottomNavBar />
         </div>
     )
 }

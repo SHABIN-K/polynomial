@@ -1,6 +1,10 @@
+import { useState } from "react";
 import MarketCard from "./Components/MarketCard";
+import MarketBottomNavbar from "./Components/MarketBottomNavbar";
 
 const MarketsPage = () => {
+  const [query, setQuery] = useState("");
+
   const assets = [
     {
       id: "btc",
@@ -85,14 +89,24 @@ const MarketsPage = () => {
   ]
 
   return (
-    <div className="text-white pt-1">
-      <div className=""></div>
-      <div className="flex flex-col">
+    <>
+      <div className="flex items-center bg-white rounded-full border border-gray-200 p-4 mt-2 mx-2 shadow-md">
+        <input
+          type="text"
+          value={query}
+          onChange={(e) => setQuery(e.target.value)}
+          placeholder="Search Market"
+          className="w-full bg-transparent outline-none font-medium text-base text-gray-800 placeholder-gray-700"
+        />
+      </div>
+
+      <div className="flex flex-col mx-auto">
         {assets.map((asset) => (
           <MarketCard key={asset.id} asset={asset} />
         ))}
       </div>
-    </div>
+      <MarketBottomNavbar />
+    </>
   );
 };
 
