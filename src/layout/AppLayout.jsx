@@ -1,7 +1,6 @@
+import AppLoader from '@/components/AppLoader'
 import React, { Suspense } from 'react'
 import { Outlet } from 'react-router-dom'
-
-import AppLoader from '../components/AppLoader'
 
 const AppLayout = () => {
     return (
