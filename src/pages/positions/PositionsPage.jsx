@@ -7,7 +7,7 @@ import PositionCard from "./components/positionCard";
 import EmptyMessage from "@/components/EmptyMessage";
 
 import { dummyPositions } from "@/constants";
-import { polynomialClient } from "@/lib/polynomialfi";
+import { getPolynomialClient } from "@/lib/polynomialfi";
 import AppLoader from "@/components/AppLoader";
 import { useQuery } from "@tanstack/react-query";
 import { normalizePositionData } from "@/utils/normalizePositionData";
@@ -16,7 +16,8 @@ const PositionsPage = () => {
   const { data: positions = [], isLoading, isError, error } = useQuery({
     queryKey: ["positions"],
     queryFn: async () => {
-      const result = await polynomialClient.accounts.getPositions();
+      const client = await getPolynomialClient();
+      const result = await client.accounts.getPositions();
       console.log(result)
       return (result || []).map(normalizePositionData);
     },

@@ -8,7 +8,7 @@ import EmptyMessage from "@/components/EmptyMessage";
 import BottomNavbar from "@/components/BottomNavbar";
 import MarketSearchBar from "./components/MarketSearchBar";
 
-import { polynomialClient } from "@/lib/polynomialfi";
+import { getPolynomialClient } from "@/lib/polynomialfi";
 import useWatchlistStore from "@/store/useWatchlistStore";
 import { normalizeMarketData } from "@/utils/normalizeMarketData";
 
@@ -20,7 +20,8 @@ const MarketsPage = () => {
   const { data: markets = [], isLoading, isError, error } = useQuery({
     queryKey: ["markets"],
     queryFn: async () => {
-      const rawMarkets = await polynomialClient.markets.getMarkets();
+      const client = await getPolynomialClient();
+      const rawMarkets = await client.markets.getMarkets();
       return rawMarkets.slice(0, 25).map(normalizeMarketData);
     },
     staleTime: 60 * 1000,
