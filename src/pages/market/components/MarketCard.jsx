@@ -16,6 +16,10 @@ const MarketCard = ({ asset }) => {
                         src={`https://polynomial.fi/markets/${(asset.symbol || '').toLowerCase()}.svg`}
                         alt="Token logo icon"
                         className="w-full h-full object-contain object-center"
+                        onError={(e) => {
+                            e.currentTarget.onerror = null
+                            e.currentTarget.src = "/fallback-token.svg"
+                        }}
                     />
                 </div>
 
@@ -42,7 +46,7 @@ const MarketCard = ({ asset }) => {
 
                     <div className='flex flex-col items-end justify-center'>
                         <h3 className="font-bold text-gray-900 text-base">{asset.price}</h3>
-                        <span className="text-gray-500 text-sm font-semibold">{asset.amount}</span>
+                        <span className="text-gray-500 text-sm font-semibold">{asset.volume}</span>
                     </div>
                 </div>
                 <div className="absolute bottom-0 left-20 right-4 h-[2.8px] bg-[#eeeeee]" />

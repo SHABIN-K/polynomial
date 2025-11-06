@@ -1,48 +1,70 @@
 import { useMemo, useState } from "react";
+import { useQuery } from "@tanstack/react-query";
+
 import TopNavbar from "@/components/TopNavbar";
+import AppLoader from "@/components/AppLoader";
 import MarketCard from "./components/MarketCard";
 import EmptyMessage from "@/components/EmptyMessage";
 import BottomNavbar from "@/components/BottomNavbar";
 import MarketSearchBar from "./components/MarketSearchBar";
 
+import { polynomialClient } from "@/lib/polynomialfi";
 import useWatchlistStore from "@/store/useWatchlistStore";
-
-import { assets } from "@/constants";
+import { normalizeMarketData } from "@/utils/normalizeMarketData";
 
 const MarketsPage = () => {
   const { showWatchlistOnly, watchlist } = useWatchlistStore();
   const [query, setQuery] = useState("");
 
-  const filteredAssets = useMemo(() => {
-    const normalizedQuery = query.trim().toLowerCase();
+  // ---- Fetch market data  ----
+  const { data: markets = [], isLoading, isError, error } = useQuery({
+    queryKey: ["markets"],
+    queryFn: async () => {
+      const rawMarkets = await polynomialClient.markets.getMarkets();
+      return rawMarkets.slice(0, 25).map(normalizeMarketData);
+    },
+    staleTime: 60 * 1000,
+    // refetchInterval: 30000,
+  });
 
-    const baseAssets = showWatchlistOnly
-      ? assets.filter((a) => watchlist.includes(a.id))
-      : assets;
+  // ---- Filter & Search Logic ----
+  const filteredMarkets = useMemo(() => {
+    const normalizedQuery = query.trim().toLowerCase()
 
-    if (!normalizedQuery) return baseAssets;
+    const visibleMarkets = showWatchlistOnly
+      ? markets.filter((m) => watchlist.includes(m.id))
+      : markets
 
-    return baseAssets.filter((a) =>
-      a.name.toLowerCase().includes(normalizedQuery) ||
-      a.symbol.toLowerCase().includes(normalizedQuery)
+    if (!normalizedQuery) return visibleMarkets
+
+    return visibleMarkets.filter((m) => m.symbol.toLowerCase().includes(normalizedQuery))
+  }, [markets, query, showWatchlistOnly, watchlist])
+
+  if (isLoading) return <AppLoader />;
+
+  if (isError)
+    return (
+      <div className="py-20 text-center text-gray-400">
+        <p>⚠️ Failed to load markets</p>
+        <p className="text-xs mt-1">{error?.message || "Unknown error"}</p>
+      </div>
     );
-  }, [showWatchlistOnly, query, watchlist]);
 
   return (
-    <div className="py-16">
+    <main className="py-16">
       <TopNavbar />
       <MarketSearchBar query={query} setQuery={setQuery} />
       <div className="flex flex-col mx-auto">
-        {filteredAssets.length === 0 ? (
+        {filteredMarkets.length === 0 ? (
           <EmptyMessage subtitle="Try adjusting your search or watchlist filter" />
         ) : (
-          filteredAssets.map((asset) => (
+          filteredMarkets.map((asset) => (
             <MarketCard key={asset.id} asset={asset} />
           ))
         )}
       </div>
       <BottomNavbar />
-    </div>
+    </main>
   );
 };
 
