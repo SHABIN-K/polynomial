@@ -2,9 +2,9 @@ import { lazy } from 'react';
 import { Routes, Route, Navigate } from 'react-router-dom';
 
 import AppLayout from '@/layout/AppLayout';
-import MarketsPage from '@/pages/marketPage/MarketsPage';
-const TradePage = lazy(() => import("@/pages/tradePage/TradePage"));
 const PositionsPage = lazy(() => import("@/pages/PositionsPage"));
+const TradePage = lazy(() => import("@/pages/tradePage/TradePage"));
+const MarketsPage = lazy(() => import("@/pages/marketPage/MarketsPage"));
 
 export default function AppRoutes() {
     return (
