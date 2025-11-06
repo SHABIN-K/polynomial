@@ -1,6 +1,6 @@
 import React from 'react'
 
-const AppLoader = () => {
+const AppLoaderFix = () => {
     return (
         <div className="w-[100%] h-screen gap-1 pt-40 pb-40 relative flex items-center justify-center">
             <div className="flex flex-col items-center animate-[bounce_1s_ease-in-out_infinite_0.1s]">
@@ -24,4 +24,4 @@ const AppLoader = () => {
     )
 }
 
-export default AppLoader
+export default AppLoaderFix
