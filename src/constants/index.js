@@ -3,7 +3,6 @@ export const dummyPositions = [
     {
         id: 1,
         symbol: "BTC",
-        name: "Bitcoin",
         investedAmount: "$71,250",
         sold: "$0",
         remaining: "$0.001981",
@@ -13,7 +12,6 @@ export const dummyPositions = [
     {
         id: 2,
         symbol: "ETH",
-        name: "Ethereum",
         investedAmount: "$108,000",
         sold: "$0",
         remaining: "$0.001593",
@@ -23,7 +21,6 @@ export const dummyPositions = [
     {
         id: 3,
         symbol: "XRP",
-        name: "Ripple",
         investedAmount: "$18,750",
         sold: "$0",
         remaining: "$0.031739",
@@ -31,3 +28,4 @@ export const dummyPositions = [
         pnlPercent: -92.69,
     },
 ];
+

@@ -54,7 +54,8 @@ const MarketsPage = () => {
     <main className="py-16">
       <TopNavbar />
       <MarketSearchBar query={query} setQuery={setQuery} />
-      <div className="flex flex-col mx-auto">
+
+      <section className="flex flex-col mx-auto">
         {filteredMarkets.length === 0 ? (
           <EmptyMessage subtitle="Try adjusting your search or watchlist filter" />
         ) : (
@@ -62,7 +63,8 @@ const MarketsPage = () => {
             <MarketCard key={asset.id} asset={asset} />
           ))
         )}
-      </div>
+      </section>
+
       <BottomNavbar />
     </main>
   );

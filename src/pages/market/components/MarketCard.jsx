@@ -3,7 +3,7 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 import { Sparklines, SparklinesLine } from 'react-sparklines'
 
-const MarketCard = ({ asset }) => {
+const MarketCard = React.memo(({ asset }) => {
     const getTrendColor = (change) => {
         return change >= 0 ? "text-green-500" : "text-red-500"
     }
@@ -53,6 +53,6 @@ const MarketCard = ({ asset }) => {
             </div>
         </Link>
     )
-}
+})
 
 export default MarketCard

@@ -2,7 +2,6 @@ import clsx from 'clsx'
 import React from 'react'
 import { Link } from 'react-router-dom'
 
-
 const Stat = ({ label, value, color, align = "start" }) => (
     <div className={clsx("flex flex-col text-sm", align === "end" && "items-end")}>
         <span className="text-[12px] font-bold text-gray-400 capitalize">{label}</span>
@@ -11,11 +10,10 @@ const Stat = ({ label, value, color, align = "start" }) => (
 );
 
 
-const PositionCard = ({ position }) => {
+const PositionCard = React.memo(({ position }) => {
     const isProfit = position.pnl >= 0
     const pnlColor = isProfit ? "text-green-500" : "text-red-500"
-    const iconSrc = `https://polynomial.fi/markets/${(position.symbol || '').toLowerCase()}.svg`
-
+    
     return (
         <Link to={`/trade/${position.symbol}`}>
             <div className="relative rounded-md mx-2 bg-white text-gray-700 border border-[#1b2230] shadow-sm">
@@ -24,9 +22,13 @@ const PositionCard = ({ position }) => {
                     <div className="flex items-center gap-1">
                         <div className="w-7 h-7 rounded-full">
                             <img
-                                src={iconSrc}
-                                alt={position.name || position.symbol}
+                                src={`https://polynomial.fi/markets/${(position.symbol || '').toLowerCase()}.svg`}
+                                alt="token img"
                                 className="w-full h-full object-contain"
+                                onError={(e) => {
+                                    e.currentTarget.onerror = null
+                                    e.currentTarget.src = "/fallback-token.svg"
+                                }}
                             />
                         </div>
                         <span className="font-bold text-sm uppercase tracking-wide">
@@ -55,7 +57,7 @@ const PositionCard = ({ position }) => {
                     <Stat label="Remaining" value={position.remaining} />
                     <Stat
                         label="PnL%"
-                        value={position.pnlPercent+"%"}
+                        value={position.pnlPercent + "%"}
                         color={position.pnlPercent >= 0 ? "text-green-400" : "text-red-400"}
                         align="end"
                     />
@@ -63,6 +65,6 @@ const PositionCard = ({ position }) => {
             </div>
         </Link>
     )
-}
+})
 
 export default PositionCard

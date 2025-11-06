@@ -7,7 +7,7 @@ const TopNavbar = () => {
     const { setShowWatchlistOnly, showWatchlistOnly } = useWatchlistStore();
 
     return (
-        <nav className="fixed top-0 left-0 right-0 bg-[#f3f3f3] border-b border-gray-300 shadow-sm z-50">
+        <header className="fixed top-0 left-0 right-0 bg-[#f3f3f3] border-b border-gray-300 shadow-sm z-50">
             <div className="flex items-center justify-between h-16 max-w-screen-sm mx-auto px-3">
                 <div className="w-10 h-10 rounded-lg flex items-center justify-center">
                     <img
@@ -31,7 +31,7 @@ const TopNavbar = () => {
                     </div>
                 </div>
             </div>
-        </nav>
+        </header>
     )
 }
 
