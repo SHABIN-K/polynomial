@@ -1,7 +1,9 @@
 import { BellDot, Star } from "lucide-react"
+import { useLocation } from "react-router-dom";
 import useWatchlistStore from "@/store/useWatchlistStore";
 
-const MarketTopNavbar = () => {
+const TopNavbar = () => {
+    const location = useLocation();
     const { setShowWatchlistOnly, showWatchlistOnly } = useWatchlistStore();
 
     return (
@@ -16,12 +18,14 @@ const MarketTopNavbar = () => {
                 </div>
 
                 <div className="flex items-center gap-2">
-                    <div onClick={() => setShowWatchlistOnly()} className="p-2 rounded-lg hover:bg-gray-100">
-                        <Star
-                            className="w-6 h-6"
-                            color={showWatchlistOnly ? "#facc15" : "#4b5563"}
-                            fill={showWatchlistOnly ? "#facc15" : "none"} />
-                    </div>
+                    {location.pathname === "/" && (
+                        <div onClick={() => setShowWatchlistOnly()} className="p-2 rounded-lg hover:bg-gray-100">
+                            <Star
+                                className="w-6 h-6"
+                                color={showWatchlistOnly ? "#facc15" : "#4b5563"}
+                                fill={showWatchlistOnly ? "#facc15" : "none"} />
+                        </div>
+                    )}
                     <div className="p-2 rounded-lg hover:bg-gray-100">
                         <BellDot className="w-6 h-6 text-gray-600" />
                     </div>
@@ -31,4 +35,4 @@ const MarketTopNavbar = () => {
     )
 }
 
-export default MarketTopNavbar
+export default TopNavbar

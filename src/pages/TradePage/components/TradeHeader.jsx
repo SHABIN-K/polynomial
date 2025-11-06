@@ -10,7 +10,7 @@ const TradeHeader = () => {
     return (
         <div className="flex justify-between items-center p-3 bg-[#f3f3f3] border-b border-gray-400">
             <div className="flex items-center gap-2">
-                <ArrowBigLeft onClick={() => navigate("/")} className="text-gray-800" size={25} />
+                <ArrowBigLeft onClick={() => navigate(-1)} className="text-gray-800" size={25} />
                 <div className="w-12 h-12">
                     <img
                         src="https://polynomial.fi/markets/eth.svg"

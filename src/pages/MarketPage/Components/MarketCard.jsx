@@ -13,7 +13,7 @@ const MarketCard = ({ asset }) => {
             <div className="relative flex flex-row items-center p-3 gap-x-3">
                 <div className="w-12 h-12">
                     <img
-                        src="https://polynomial.fi/markets/btc.svg"
+                        src={`https://polynomial.fi/markets/${(asset.symbol || '').toLowerCase()}.svg`}
                         alt="Token logo icon"
                         className="w-full h-full object-contain object-center"
                     />

@@ -1,9 +1,9 @@
 import { useMemo, useState } from "react";
+import TopNavbar from "@/components/TopNavbar";
 import MarketCard from "./components/MarketCard";
 import EmptyMessage from "@/components/EmptyMessage";
-import MarketTopNavbar from "./components/MarketTopNavbar";
+import BottomNavbar from "@/components/BottomNavbar";
 import MarketSearchBar from "./components/MarketSearchBar";
-import MarketBottomNavbar from "./components/MarketBottomNavbar";
 
 import useWatchlistStore from "@/store/useWatchlistStore";
 
@@ -30,7 +30,7 @@ const MarketsPage = () => {
 
   return (
     <div className="py-16">
-      <MarketTopNavbar />
+      <TopNavbar />
       <MarketSearchBar query={query} setQuery={setQuery} />
       <div className="flex flex-col mx-auto">
         {filteredAssets.length === 0 ? (
@@ -41,7 +41,7 @@ const MarketsPage = () => {
           ))
         )}
       </div>
-      <MarketBottomNavbar />
+      <BottomNavbar />
     </div>
   );
 };

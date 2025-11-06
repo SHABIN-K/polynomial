@@ -2,7 +2,7 @@ import { clsx } from "clsx";
 import { Link, useLocation } from "react-router-dom";
 import { ChartCandlestick, SendToBack, WalletMinimal, ChartLine } from "lucide-react"
 
-const MarketBottomNavbar = () => {
+const BottomNavbar = () => {
     const location = useLocation();
 
     const navItems = [
@@ -37,4 +37,4 @@ const MarketBottomNavbar = () => {
     )
 };
 
-export default MarketBottomNavbar;
+export default BottomNavbar;
