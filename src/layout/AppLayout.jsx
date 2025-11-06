@@ -1,11 +1,11 @@
-import AppLoaderFix from '@/components/AppLoaderFix'
+import AppLoader from '@/components/AppLoader'
 import React, { Suspense } from 'react'
 import { Outlet } from 'react-router-dom'
 
 const AppLayout = () => {
     return (
         <div className="relative bg-[#f3f3f3] min-h-screen">
-            <Suspense fallback={<AppLoaderFix />}>
+            <Suspense fallback={<AppLoader />}>
                 <Outlet />
             </Suspense>
         </div>
