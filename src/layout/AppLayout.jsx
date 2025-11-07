@@ -1,6 +1,8 @@
-import AppLoader from '@/components/AppLoader'
+import { Toaster } from 'sonner'
 import React, { Suspense } from 'react'
 import { Outlet } from 'react-router-dom'
+
+import AppLoader from '@/components/AppLoader'
 
 const AppLayout = () => {
     return (
@@ -8,6 +10,7 @@ const AppLayout = () => {
             <Suspense fallback={<AppLoader />}>
                 <Outlet />
             </Suspense>
+            <Toaster closeButton />
         </div>
     )
 }

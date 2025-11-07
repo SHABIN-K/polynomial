@@ -1,5 +1,9 @@
 import clsx from 'clsx';
+import { toast } from 'sonner';
 import React, { useState } from 'react'
+import { parseUnits } from 'polynomialfi';
+
+import { getPolynomialClient } from '@/lib/polynomialfi';
 
 const InfoRow = ({ label, leftText }) => {
     return (
@@ -10,16 +14,80 @@ const InfoRow = ({ label, leftText }) => {
     );
 };
 
-const TradeForm = ({ orderSide }) => {
+const TradeForm = ({ orderSide, marketSymbol, market, position }) => {
     const [amount, setAmount] = useState("");
-    const [percentage, setPercentage] = useState(null); 
+    const [percentage, setPercentage] = useState(null);
+    const [isSubmitting, setIsSubmitting] = useState(false);
+
+    const handleSubmit = async () => {
+        if (isSubmitting) return;
+        setIsSubmitting(true);
+
+        const promise = (async () => {
+            const client = await getPolynomialClient();
+
+            const usdAmount = parseFloat(amount);
+            if (!usdAmount || usdAmount <= 0) throw new Error("Enter valid amount");
+
+            // ✅ convert USD → token size
+            const sizeInToken = usdAmount / market.price;
+            const sizeDelta = parseUnits(sizeInToken.toString()).toString();
+
+            // ✅ feasibility check
+            const preview = await client.getPostTradeDetails(
+                market.id,
+                sizeDelta,
+                orderSide === "buy"
+            );
+
+            if (!preview.isFeasible) {
+                console.error("Trade not feasible:", preview.errorMsg || preview);
+                throw new Error(preview.errorMsg || "Trade not feasible — check margin or size.");
+            }
+
+            // ✅ decide function based on side
+            const tx =
+                orderSide === "buy"
+                    ? await client.orders.createLongOrder(
+                        market.id,
+                        parseUnits(sizeInToken.toString()),
+                        parseUnits((market.price * 1.01).toString())
+                    )
+                    : await client.orders.createShortOrder(
+                        market.id,
+                        parseUnits(sizeInToken.toString()),
+                        parseUnits((market.price * 0.99).toString())
+                    );
+
+            // reset form
+            setAmount("");
+            setPercentage(null);
+            return tx;
+        })();
+
+        toast.promise(promise, {
+            loading: `${orderSide === "buy" ? "Buying" : "Selling"}...`,
+            success: `${orderSide.toUpperCase()} order placed for ${amount} ${marketSymbol}`,
+            error: (err) => err.message || "Order failed ❌",
+        });
+
+        setIsSubmitting(false);
+    };
 
     const handleSelect = (value) => {
+        if (orderSide !== "sell") return;
+        const positionSize = Math.abs(Number(position?.size || 0) / 1e18);
+        const currentValue = positionSize * market.price;  // total USD value of holding
         setPercentage(value);
-        // Example: auto-calc amount (you can connect to wallet balance later)
-        const balance = 1000; // mock balance
-        setAmount(((balance * value) / 100).toFixed(2));
+        setAmount(((currentValue * value) / 100));
     };
+
+    const handleChange = (e) => {
+        setPercentage(null);
+        setAmount(e.target.value)
+    };
+
+
     return (
         <section className="flex flex-col justify-between h-full px-2 pt-4">
 
@@ -28,8 +96,10 @@ const TradeForm = ({ orderSide }) => {
                     <label className="text-sm font-bold tracking-wider text-gray-700">Amount</label>
                     <input
                         type="number"
+                        value={amount}
+                        onChange={handleChange}
                         placeholder="0"
-                        className="w-full px-3 py-2 border bg-slate-50 border-gray-300 focus:outline-none"
+                        className="w-full px-3 py-2 border text-gray-800 font-bold bg-slate-50 border-gray-300 focus:outline-none"
                     />
                 </div>
                 {orderSide === "sell" && <div className="grid grid-cols-4 gap-2">
@@ -47,18 +117,21 @@ const TradeForm = ({ orderSide }) => {
                 </div>}
             </div>
 
-
             <div className="space-y-10 bg-white py-2 px-2 rounded-md border-2 border-gray-700 shadow-md">
                 <div className="flex flex-col gap-y-1">
                     <InfoRow label="Liquidation Price" leftText="$87,804.7" />
-                    <InfoRow label="Order Size" leftText="$5,156.23" />
+                    <InfoRow label="Order Size" leftText={`$${amount}`} />
                     <InfoRow label="Slippage" leftText="Est: 0%" />
                     <InfoRow label="Fees" leftText="0% Fee" />
                 </div>
                 <button
-                    className={clsx("w-full py-2 text-gray-700 font-semibold rounded border border-gray-700 shadow-md")}
+                    onClick={handleSubmit}
+                    disabled={isSubmitting}
+                    className={clsx("w-full py-2 text-white font-bold rounded border-2 border-gray-700 shadow-lg",
+                        orderSide === "buy" ? "bg-green-500" : "bg-red-500"
+                    )}
                 >
-                    {orderSide === "buy" ? "Buy PUPI for 0" : "Sell PUPI for 0"}
+                    {orderSide === "buy" ? `Buy $${marketSymbol}${amount && `for ${amount}`}` : `Sell $${marketSymbol} ${amount && `for ${amount}`}`}
                 </button>
             </div>
 

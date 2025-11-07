@@ -15,26 +15,40 @@ const TradePage = () => {
   const { marketSymbol } = useParams();
   const [orderSide, setOrderSide] = useState("buy");
 
-  const { data: market = [], isLoading, isError, error } = useQuery({
+  const { data, isLoading, isError, error } = useQuery({
     queryKey: ["singlemarket", marketSymbol],
     queryFn: async () => {
       if (!marketSymbol) return null;
       const client = await getPolynomialClient();
+
+      // get market info
       const raw = await client.markets.getMarketBySymbol(marketSymbol);
-      return normalizeSingleMarketData(raw);
+
+      // get user position for that market
+      const summary = await client.accounts.getPositionByMarket(raw.marketId);
+
+      return {
+        market: normalizeSingleMarketData(raw),
+        position: summary || {},
+      };
     },
     staleTime: 60 * 1000,
-    refetchInterval: 30000,
   });
 
+  console.log(data)
   if (isLoading) return <AppLoader />;
 
   if (isError) return <QueryErrorMessage title="Failed to load markets" error={error} />;
 
   return (
     <main className="flex flex-col pb-28 h-screen">
-      <TradeHeader market={market} />
-      <TradeForm orderSide={orderSide} />
+      <TradeHeader market={data?.market} />
+      <TradeForm
+        orderSide={orderSide}
+        marketSymbol={marketSymbol}
+        market={data?.market}
+        position={data?.position}
+      />
       <TradeActions
         marketSymbol={marketSymbol}
         orderSide={orderSide}

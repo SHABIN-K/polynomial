@@ -30,10 +30,10 @@ const TradeHeader = React.memo(({ market }) => {
                     <div className={clsx("text-lg font-bold text-gray-800",
                         market.price > 0 ? "text-green-600" : "text-red-600"
                     )}>
-                        ${market.price.toFixed(6)}
+                        ${market?.price?.toFixed(2)}
                     </div>
                     <div className="text-sm font-medium text-gray-700">
-                        {market.change.toFixed(3)}
+                        {market?.change?.toFixed(3)}
                     </div>
                 </div>
             </div>
