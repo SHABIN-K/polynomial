@@ -8,11 +8,11 @@ import TradeActions from "./components/TradeAction";
 const TradePage = () => {
   const { marketSymbol } = useParams();
   return (
-    <div>
+    <main className="flex flex-col pb-28 h-screen">
       <TradeHeader />
       <TradeForm />
       <TradeActions marketSymbol={marketSymbol} />
-    </div>
+    </main>
   )
 };
 
