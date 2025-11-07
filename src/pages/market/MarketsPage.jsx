@@ -7,6 +7,7 @@ import MarketCard from "./components/MarketCard";
 import EmptyMessage from "@/components/EmptyMessage";
 import BottomNavbar from "@/components/BottomNavbar";
 import MarketSearchBar from "./components/MarketSearchBar";
+import QueryErrorMessage from "@/components/QueryErrorMessage";
 
 import { getPolynomialClient } from "@/lib/polynomialfi";
 import useWatchlistStore from "@/store/useWatchlistStore";
@@ -33,7 +34,7 @@ const MarketsPage = () => {
     const normalizedQuery = query.trim().toLowerCase()
 
     const visibleMarkets = showWatchlistOnly
-      ? markets.filter((m) => watchlist.includes(m.id))
+      ? markets.filter((m) => watchlist.includes(m.symbol.toLowerCase()))
       : markets
 
     if (!normalizedQuery) return visibleMarkets
@@ -41,15 +42,10 @@ const MarketsPage = () => {
     return visibleMarkets.filter((m) => m.symbol.toLowerCase().includes(normalizedQuery))
   }, [markets, query, showWatchlistOnly, watchlist])
 
+
   if (isLoading) return <AppLoader />;
 
-  if (isError)
-    return (
-      <div className="py-20 text-center text-gray-400">
-        <p>⚠️ Failed to load markets</p>
-        <p className="text-xs mt-1">{error?.message || "Unknown error"}</p>
-      </div>
-    );
+  if (isError) return <QueryErrorMessage title="Failed to load markets" error={error} />;
 
   return (
     <main className="py-16">

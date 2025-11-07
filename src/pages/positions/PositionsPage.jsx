@@ -11,6 +11,7 @@ import { getPolynomialClient } from "@/lib/polynomialfi";
 import AppLoader from "@/components/AppLoader";
 import { useQuery } from "@tanstack/react-query";
 import { normalizePositionData } from "@/utils/normalizePositionData";
+import QueryErrorMessage from "@/components/QueryErrorMessage";
 
 const PositionsPage = () => {
   const { data: positions = [], isLoading, isError, error } = useQuery({
@@ -53,13 +54,8 @@ const PositionsPage = () => {
   // ---- Render states ----
   if (isLoading) return <AppLoader />;
 
-  if (isError)
-    return (
-      <div className="text-center text-gray-400 py-20">
-        <p>⚠️ Failed to load positions</p>
-        <p className="text-xs mt-1">{error?.message || "Unknown error"}</p>
-      </div>
-    );
+  if (isError) return <QueryErrorMessage title="Failed to load positions" error={error} />;
+
 
   return (
     <main className="py-16">

@@ -1,0 +1,518 @@
+[
+  {
+    "marketId": "100",
+    "symbol": "ETH",
+    "price": 3332.93441098,
+    "name": "Ethereum"
+  },
+  {
+    "marketId": "1000",
+    "symbol": "PNUT",
+    "price": 0.10842794,
+    "name": "Peanut"
+  },
+  {
+    "marketId": "1100",
+    "symbol": "MOG",
+    "price": 3.62407,
+    "name": "Mog"
+  },
+  {
+    "marketId": "1200",
+    "symbol": "ENA",
+    "price": 0.31691361,
+    "name": "Ethena"
+  },
+  {
+    "marketId": "1300",
+    "symbol": "DOGE",
+    "price": 0.161145,
+    "name": "Dogecoin"
+  },
+  {
+    "marketId": "1400",
+    "symbol": "EIGEN",
+    "price": 0.73192031,
+    "name": "Eigen"
+  },
+  {
+    "marketId": "1500",
+    "symbol": "XRP",
+    "price": 2.23749999,
+    "name": "XRP"
+  },
+  {
+    "marketId": "1600",
+    "symbol": "TIA",
+    "price": 0.80389232,
+    "name": "Celestia"
+  },
+  {
+    "marketId": "1700",
+    "symbol": "AVAX",
+    "price": 16.05000067,
+    "name": "Avalanche"
+  },
+  {
+    "marketId": "1800",
+    "symbol": "LTC",
+    "price": 87.72436899,
+    "name": "Litecoin"
+  },
+  {
+    "marketId": "1900",
+    "symbol": "LINK",
+    "price": 14.676,
+    "name": "Chainlink"
+  },
+  {
+    "marketId": "200",
+    "symbol": "BTC",
+    "price": 101741.94572615,
+    "name": "Bitcoin"
+  },
+  {
+    "marketId": "2000",
+    "symbol": "PENGU",
+    "price": 0.01473212,
+    "name": "Pengu"
+  },
+  {
+    "marketId": "2100",
+    "symbol": "VIRTUAL",
+    "price": 1.22759761,
+    "name": "Virtuals"
+  },
+  {
+    "marketId": "2200",
+    "symbol": "HYPE",
+    "price": 38.66697972,
+    "name": "Hype"
+  },
+  {
+    "marketId": "2300",
+    "symbol": "FARTCOIN",
+    "price": 0.25677362,
+    "name": "Fartcoin"
+  },
+  {
+    "marketId": "2400",
+    "symbol": "MOVE",
+    "price": 0.05452743,
+    "name": "Move"
+  },
+  {
+    "marketId": "2500",
+    "symbol": "AI16Z",
+    "price": 0.05447743,
+    "name": "ai16z"
+  },
+  {
+    "marketId": "2600",
+    "symbol": "SNX",
+    "price": 0.82341321,
+    "name": "Synthetix"
+  },
+  {
+    "marketId": "2700",
+    "symbol": "PYTH",
+    "price": 0.08961832,
+    "name": "Pyth Network"
+  },
+  {
+    "marketId": "2800",
+    "symbol": "SPX",
+    "price": 0.63634476,
+    "name": "S&P 500 Index"
+  },
+  {
+    "marketId": "2900",
+    "symbol": "TRUMP",
+    "price": 7.88294352,
+    "name": "TRUMP"
+  },
+  {
+    "marketId": "300",
+    "symbol": "Sol",
+    "price": 157.52503005,
+    "name": "Solana"
+  },
+  {
+    "marketId": "3000",
+    "symbol": "S",
+    "price": 0.12305594,
+    "name": "S"
+  },
+  {
+    "marketId": "3100",
+    "symbol": "ONDO",
+    "price": 0.59061612,
+    "name": "Ondo"
+  },
+  {
+    "marketId": "3200",
+    "symbol": "JUP",
+    "price": 0.34194184,
+    "name": "Jupiter"
+  },
+  {
+    "marketId": "3400",
+    "symbol": "BERA",
+    "price": 1.41429336,
+    "name": "BERA"
+  },
+  {
+    "marketId": "3500",
+    "symbol": "ADA",
+    "price": 0.52858482,
+    "name": "Cardano"
+  },
+  {
+    "marketId": "3600",
+    "symbol": "BNB",
+    "price": 950.165,
+    "name": "BNB"
+  },
+  {
+    "marketId": "3700",
+    "symbol": "ARB",
+    "price": 0.2619954,
+    "name": "Arbitrum"
+  },
+  {
+    "marketId": "3800",
+    "symbol": "KAITO",
+    "price": 0.83192493,
+    "name": "KAITO"
+  },
+  {
+    "marketId": "3900",
+    "symbol": "IP",
+    "price": 3.38045249,
+    "name": "IP"
+  },
+  {
+    "marketId": "400",
+    "symbol": "PEPE",
+    "price": 5.5049e-6,
+    "name": "PEPE"
+  },
+  {
+    "marketId": "4000",
+    "symbol": "HBAR",
+    "price": 0.16565144,
+    "name": "HBAR"
+  },
+  {
+    "marketId": "4100",
+    "symbol": "BCH",
+    "price": 472.14118553,
+    "name": "BCH"
+  },
+  {
+    "marketId": "4200",
+    "symbol": "ZORA",
+    "price": 0.06072972,
+    "name": "ZORA"
+  },
+  {
+    "marketId": "4300",
+    "symbol": "COOKIE",
+    "price": 0.06780197,
+    "name": "COOKIE"
+  },
+  {
+    "marketId": "4400",
+    "symbol": "APE",
+    "price": 0.36322262,
+    "name": "APE"
+  },
+  {
+    "marketId": "4500",
+    "symbol": "LDO",
+    "price": 0.740855,
+    "name": "LDO"
+  },
+  {
+    "marketId": "4600",
+    "symbol": "SOLV",
+    "price": 0.01625981,
+    "name": "SOLV"
+  },
+  {
+    "marketId": "4700",
+    "symbol": "ALT",
+    "price": 0.01599473,
+    "name": "ALT"
+  },
+  {
+    "marketId": "4800",
+    "symbol": "ATOM",
+    "price": 2.62956677,
+    "name": "ATOM"
+  },
+  {
+    "marketId": "4900",
+    "symbol": "FLOKI",
+    "price": 5.84994e-5,
+    "name": "FLOKI"
+  },
+  {
+    "marketId": "500",
+    "symbol": "WIF",
+    "price": 0.42655881,
+    "name": "WIF"
+  },
+  {
+    "marketId": "5000",
+    "symbol": "WCT",
+    "price": 0.10718393,
+    "name": "WCT"
+  },
+  {
+    "marketId": "5100",
+    "symbol": "PENDLE",
+    "price": 2.61655692,
+    "name": "PENDLE"
+  },
+  {
+    "marketId": "5200",
+    "symbol": "GRT",
+    "price": 0.05512638,
+    "name": "GRT"
+  },
+  {
+    "marketId": "5300",
+    "symbol": "AERO",
+    "price": 0.87850323,
+    "name": "AERO"
+  },
+  {
+    "marketId": "5400",
+    "symbol": "MORPHO",
+    "price": 1.67968694,
+    "name": "MORPHO"
+  },
+  {
+    "marketId": "5500",
+    "symbol": "WLD",
+    "price": 0.71224766,
+    "name": "WLD"
+  },
+  {
+    "marketId": "5600",
+    "symbol": "AIXBT",
+    "price": 0.06051,
+    "name": "AIXBT"
+  },
+  {
+    "marketId": "5700",
+    "symbol": "ETHFI",
+    "price": 0.86186599,
+    "name": "ETHFI"
+  },
+  {
+    "marketId": "5800",
+    "symbol": "MERL",
+    "price": 0.31563842,
+    "name": "MERL"
+  },
+  {
+    "marketId": "5900",
+    "symbol": "STX",
+    "price": 0.34911068,
+    "name": "STX"
+  },
+  {
+    "marketId": "600",
+    "symbol": "SUI",
+    "price": 1.95509368,
+    "name": "SUI"
+  },
+  {
+    "marketId": "6000",
+    "symbol": "PRCL",
+    "price": 0.04235148,
+    "name": "PRCL"
+  },
+  {
+    "marketId": "6100",
+    "symbol": "APT",
+    "price": 2.7026657,
+    "name": "APT"
+  },
+  {
+    "marketId": "6200",
+    "symbol": "NXPC",
+    "price": 0.31759564,
+    "name": "NXPC"
+  },
+  {
+    "marketId": "6300",
+    "symbol": "HUMA",
+    "price": 0.02392207,
+    "name": "HUMA"
+  },
+  {
+    "marketId": "6400",
+    "symbol": "ZETA",
+    "price": 0.0986888,
+    "name": "ZETA"
+  },
+  {
+    "marketId": "6500",
+    "symbol": "FIL",
+    "price": 1.63937029,
+    "name": "FIL"
+  },
+  {
+    "marketId": "6600",
+    "symbol": "B3",
+    "price": 0.00187971,
+    "name": "B3"
+  },
+  {
+    "marketId": "6700",
+    "symbol": "RESOLV",
+    "price": 0.07098578,
+    "name": "RESOLV"
+  },
+  {
+    "marketId": "6800",
+    "symbol": "CAKE",
+    "price": 2.24848196,
+    "name": "CAKE"
+  },
+  {
+    "marketId": "6900",
+    "symbol": "ZRO",
+    "price": 1.51375798,
+    "name": "ZRO"
+  },
+  {
+    "marketId": "700",
+    "symbol": "AAVE",
+    "price": 198.8427251,
+    "name": "AAVE"
+  },
+  {
+    "marketId": "7000",
+    "symbol": "TON",
+    "price": 1.9384739,
+    "name": "TON"
+  },
+  {
+    "marketId": "7100",
+    "symbol": "JTO",
+    "price": 0.7501,
+    "name": "JTO"
+  },
+  {
+    "marketId": "7200",
+    "symbol": "ARKM",
+    "price": 0.2984848,
+    "name": "ARKM"
+  },
+  {
+    "marketId": "7300",
+    "symbol": "PUMP",
+    "price": 0.0037762,
+    "name": "PUMP"
+  },
+  {
+    "marketId": "7400",
+    "symbol": "WLFI",
+    "price": 0.11604831,
+    "name": "WLFI"
+  },
+  {
+    "marketId": "7500",
+    "symbol": "AVNT",
+    "price": 0.5137708,
+    "name": "AVNT"
+  },
+  {
+    "marketId": "7600",
+    "symbol": "LINEA",
+    "price": 0.01149613,
+    "name": "LINEA"
+  },
+  {
+    "marketId": "7700",
+    "symbol": "ASTER",
+    "price": 1.02126095,
+    "name": "ASTER"
+  },
+  {
+    "marketId": "7800",
+    "symbol": "XPL",
+    "price": 0.26515794,
+    "name": "XPL"
+  },
+  {
+    "marketId": "7900",
+    "symbol": "ORDER",
+    "price": 0.16747924,
+    "name": "ORDER"
+  },
+  {
+    "marketId": "800",
+    "symbol": "OP",
+    "price": 0.3640095,
+    "name": "OP"
+  },
+  {
+    "marketId": "8000",
+    "symbol": "XAU",
+    "price": 3989.644,
+    "name": "XAU"
+  },
+  {
+    "marketId": "8100",
+    "symbol": "EUR",
+    "price": 1.15479,
+    "name": "EUR"
+  },
+  {
+    "marketId": "8200",
+    "symbol": "JPY",
+    "price": 153.049,
+    "name": "JPY"
+  },
+  {
+    "marketId": "8300",
+    "symbol": "XAG",
+    "price": 48.2343,
+    "name": "XAG"
+  },
+  {
+    "marketId": "8400",
+    "symbol": "WTI",
+    "price": 59.25566,
+    "name": "WTI"
+  },
+  {
+    "marketId": "8500",
+    "symbol": "SPY",
+    "price": 671.81,
+    "name": "SPY"
+  },
+  {
+    "marketId": "8600",
+    "symbol": "DIA",
+    "price": 469.54005,
+    "name": "DIA"
+  },
+  {
+    "marketId": "8700",
+    "symbol": "QQQ",
+    "price": 614.26,
+    "name": "QQQ"
+  },
+  {
+    "marketId": "900",
+    "symbol": "BONK",
+    "price": 1.19295e-5,
+    "name": "BONK"
+  }
+]
