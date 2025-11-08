@@ -1,19 +1,16 @@
 import React from "react";
+import { useQuery } from "@tanstack/react-query";
 import { BriefcaseBusiness } from "lucide-react";
 
 import TopNavbar from "@/components/TopNavbar";
+import AppLoader from "@/components/AppLoader";
 import BottomNavbar from "@/components/BottomNavbar";
 import PositionCard from "./components/positionCard";
 import EmptyMessage from "@/components/EmptyMessage";
-
-import { dummyPositions } from "@/constants";
-import { getPolynomialClient } from "@/lib/polynomialfi";
-import AppLoader from "@/components/AppLoader";
-import { useQuery } from "@tanstack/react-query";
-import { normalizePositionData } from "@/utils/normalizePositionData";
 import QueryErrorMessage from "@/components/QueryErrorMessage";
 
-import position from '../../constants/position.json';
+import { getPolynomialClient } from "@/lib/polynomialfi";
+import { normalizePositionData } from "@/utils/normalizePositionData";
 
 const PositionsPage = () => {
   const { data: positions = [], isLoading, isError, error } = useQuery({
@@ -27,10 +24,6 @@ const PositionsPage = () => {
     staleTime: 60 * 1000,
   });
 
-  const positiones = position?.positions.map(normalizePositionData)
-
-
-  // console.log(positiones)
 
   // ---- Render states ----
   if (isLoading) return <AppLoader />;
@@ -48,10 +41,10 @@ const PositionsPage = () => {
       </header>
 
       <section className="flex flex-col mx-auto space-y-2">
-        {dummyPositions.length === 0 ? (
+        {positions.length === 0 ? (
           <EmptyMessage subtitle="You don't have any active positions" />
         ) : (
-          positiones.map((position) => (
+          positions.map((position) => (
             <PositionCard key={position.id} position={position} />
           ))
         )}

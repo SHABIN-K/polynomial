@@ -6,28 +6,26 @@ import marketMeta from "@/constants/metadata/data.json";
  */
 
 export const normalizePositionData = (p) => {
-    const size = BigInt(p.size)
-    const avgPrice = BigInt(p.avgEntryPrice)
-    const markPrice = BigInt(p.latestInteractionPrice)
+    const rawSize = BigInt(p.size)
+    const rawAvgPrice = BigInt(p.avgEntryPrice)
+    const rawMarkPrice = BigInt(p.latestInteractionPrice)
+    const totalVolumeUsd = Number(BigInt(p.totalVolumeUsd)) / 1e18;
 
-    const scale = 10n ** 36n
+    const ONE_E36 = 10n ** 36n;
+    const pnlUsdBig = ((rawMarkPrice - rawAvgPrice) * rawSize) / ONE_E36;
+    const pnlUsd = Number(pnlUsdBig);
 
-    const investedUsdBig = (size * avgPrice) / scale
-    const pnlUsdBig = (size * (markPrice - avgPrice)) / scale
+    const pnlPercent = totalVolumeUsd !== 0 ? (pnlUsd / totalVolumeUsd) * 100 : 0;
 
-    const investedUsd = Number(investedUsdBig)
-    const pnlUsd = Number(pnlUsdBig)
-    const pnlPercent = investedUsd !== 0 ? (pnlUsd / investedUsd) * 100 : 0
-
-    const meta = marketMeta.find(m => m.marketId === p.marketId)
-    const symbol = meta?.symbol || "UNKNOWN"
+    // Lookup market metadata using marketId from position.
+    const meta = marketMeta.find(m => m.marketId === p.marketId);
 
     return {
         id: p.marketId,
-        symbol,
-        investedAmountUsd: investedUsd,
-        markPrice: Number(markPrice) / 1e18,
-        avgPrice: Number(avgPrice) / 1e18,
+        symbol: meta?.symbol || "UNKNOWN",
+        investedAmountUsd: totalVolumeUsd,
+        markPrice: Number(rawMarkPrice) / 1e18,
+        avgPrice: Number(rawAvgPrice) / 1e18,
         pnlUsd: pnlUsd ? `$${pnlUsd}` : "-",
         pnlPercent,
     }

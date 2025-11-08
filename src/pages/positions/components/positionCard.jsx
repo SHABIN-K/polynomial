@@ -52,7 +52,7 @@ const PositionCard = React.memo(({ position }) => {
 
 
                 <div className="grid grid-cols-4 gap-2 p-2.5">
-                    <Stat label="Invested" value={position.investedAmountUsd} color="text-green-400" />
+                    <Stat label="Invested" value={position.investedAmountUsd.toPrecision(5)} color="text-green-400" />
                     <Stat label="Mark Price" value={position.markPrice.toPrecision(5)} />
                     <Stat label="Avg Entry" value={position.avgPrice.toPrecision(5)} />
                     <Stat
