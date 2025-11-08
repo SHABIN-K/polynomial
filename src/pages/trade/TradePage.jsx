@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-import { useParams } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
+import { useNavigate, useParams } from "react-router-dom";
 
 import { getPolynomialClient } from "@/lib/polynomialfi";
 import { normalizeSingleMarketData } from "@/utils/normalizeMarketData";
@@ -13,12 +13,16 @@ import QueryErrorMessage from "@/components/QueryErrorMessage";
 
 const TradePage = () => {
   const { marketSymbol } = useParams();
+  const navigate = useNavigate();
   const [orderSide, setOrderSide] = useState("buy");
 
   const { data, isLoading, isError, error } = useQuery({
     queryKey: ["singlemarket", marketSymbol],
     queryFn: async () => {
-      if (!marketSymbol) return null;
+      if (!marketSymbol) {
+        navigate("/");
+      }
+      
       const client = await getPolynomialClient();
 
       // get market info
@@ -35,7 +39,7 @@ const TradePage = () => {
     staleTime: 60 * 1000,
   });
 
-  
+
   if (isLoading) return <AppLoader />;
 
   if (isError) return <QueryErrorMessage title="Failed to load markets" error={error} />;

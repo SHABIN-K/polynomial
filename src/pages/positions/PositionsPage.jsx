@@ -18,7 +18,6 @@ const PositionsPage = () => {
     queryFn: async () => {
       const client = await getPolynomialClient();
       const result = await client.accounts.getPositions();
-      console.log(result)
       return (result || []).map(normalizePositionData);
     },
     staleTime: 60 * 1000,

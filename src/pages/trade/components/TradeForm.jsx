@@ -1,7 +1,6 @@
 import clsx from 'clsx';
 import { toast } from 'sonner';
 import React, { useState } from 'react'
-import { parseUnits } from 'polynomialfi';
 
 import { getPolynomialClient } from '@/lib/polynomialfi';
 import { getSizeUnits, getSlippagePrice } from '@/utils';
