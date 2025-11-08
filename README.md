@@ -1,23 +1,42 @@
-This is a [Vite](https://vitejs.dev) project bootstrapped with [`@farcaster/create-mini-app`](https://github.com/farcasterxyz/miniapps/tree/main/packages/create-mini-app).
+# 🌐 Polynomial.fi Farcaster Mini-App
 
-For documentation and guides, visit [miniapps.farcaster.xyz](https://miniapps.farcaster.xyz/docs/getting-started).
+A lightweight **Farcaster Mini-App** built for **Polynomial.fi**, enabling users to view **market data, pricing, open positions**, and perform quick trading actions directly inside Farcaster.
 
-## `farcaster.json`
+---
 
-The `/.well-known/farcaster.json` is served from the [public
-directory](https://vite.dev/guide/assets) and can be updated by editing
-`./public/.well-known/farcaster.json`.
+## 🏃 Getting Started
 
-You can also use the `public` directory to serve a static image for `splashBackgroundImageUrl`.
+### 1. Clone the Repository
 
-## Frame Embed
+```bash
+# Clone this repository
+  $git clone https://github.com/SHABIN-K/polynomial.git
 
-Add a the `fc:frame` in `index.html` to make your root app URL sharable in feeds:
-
-```html
-  <head>
-    <!--- other tags --->
-    <meta name="fc:frame" content='{"version":"next","imageUrl":"https://placehold.co/900x600.png?text=Frame%20Image","button":{"title":"Open","action":{"type":"launch_frame","name":"App Name","url":"https://app.com"}}}' /> 
-  </head>
+# Go into the repository
+  $cd polynomial
 ```
 
+### 2. Configure Environment Variable
+
+Create a .env file in the project root with the following keys
+
+```bash
+VITE_POLYNOMIAL_API_KEY=
+VITE_POLYNOMIAL_SESSION_KEY=
+VITE_POLYNOMIAL_WALLET_ADDRESS=
+```
+
+You can find details on how to generate and fill these values in the official [Polynomial SDK Quick Start Guide](https://github.com/Polynomial-Protocol/polynomial-npm?tab=readme-ov-file#quick-start)
+
+### 3. Install Dependencies & Run the App
+
+```bash
+yarn install
+yarn dev
+```
+
+The app will be available at http://localhost:5173
+
+---
+
+## 🧩 Architecture Overview
