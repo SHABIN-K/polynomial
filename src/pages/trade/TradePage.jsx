@@ -35,7 +35,7 @@ const TradePage = () => {
     staleTime: 60 * 1000,
   });
 
-  console.log(data)
+  
   if (isLoading) return <AppLoader />;
 
   if (isError) return <QueryErrorMessage title="Failed to load markets" error={error} />;

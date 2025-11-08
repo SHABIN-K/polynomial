@@ -4,6 +4,7 @@ import React, { useState } from 'react'
 import { parseUnits } from 'polynomialfi';
 
 import { getPolynomialClient } from '@/lib/polynomialfi';
+import { getSizeUnits, getSlippagePrice } from '@/utils';
 
 const InfoRow = ({ label, leftText }) => {
     return (
@@ -30,13 +31,12 @@ const TradeForm = ({ orderSide, marketSymbol, market, position }) => {
             if (!usdAmount || usdAmount <= 0) throw new Error("Enter valid amount");
 
             // ✅ convert USD → token size
-            const sizeInToken = usdAmount / market.price;
-            const sizeDelta = parseUnits(sizeInToken.toString()).toString();
+            const sizeUnits = getSizeUnits(usdAmount, market.price);
 
             // ✅ feasibility check
             const preview = await client.getPostTradeDetails(
                 market.id,
-                sizeDelta,
+                sizeUnits.toString(),
                 orderSide === "buy"
             );
 
@@ -45,41 +45,43 @@ const TradeForm = ({ orderSide, marketSymbol, market, position }) => {
                 throw new Error(preview.errorMsg || "Trade not feasible — check margin or size.");
             }
 
+            const slippagePrice = getSlippagePrice(market.price, orderSide);
+
             // ✅ decide function based on side
-            const tx =
-                orderSide === "buy"
-                    ? await client.orders.createLongOrder(
-                        market.id,
-                        parseUnits(sizeInToken.toString()),
-                        parseUnits((market.price * 1.01).toString())
-                    )
-                    : await client.orders.createShortOrder(
-                        market.id,
-                        parseUnits(sizeInToken.toString()),
-                        parseUnits((market.price * 0.99).toString())
-                    );
+            const tx = orderSide === "buy"
+                ? await client.orders.createLongOrder(market.id, sizeUnits, slippagePrice)
+                : await client.orders.createShortOrder(market.id, sizeUnits, slippagePrice);
 
             // reset form
             setAmount("");
             setPercentage(null);
             return tx;
-        })();
+        })().finally(() => {
+            setIsSubmitting(false);
+        });
+
 
         toast.promise(promise, {
             loading: `${orderSide === "buy" ? "Buying" : "Selling"}...`,
             success: `${orderSide.toUpperCase()} order placed for ${amount} ${marketSymbol}`,
             error: (err) => err.message || "Order failed ❌",
         });
-
-        setIsSubmitting(false);
     };
 
     const handleSelect = (value) => {
         if (orderSide !== "sell") return;
-        const positionSize = Math.abs(Number(position?.size || 0) / 1e18);
+        if (!market?.price || !position?.size) {
+            toast.error("You’re not holding anything yet");
+            return;
+        }
+
+        const rawSize = BigInt(position?.size);
+        const positionSize = Math.abs(Number(rawSize) / 1e18);
         const currentValue = positionSize * market.price;  // total USD value of holding
+
+        const usdAmount = (currentValue * value) / 100;
         setPercentage(value);
-        setAmount(((currentValue * value) / 100));
+        setAmount(Number(usdAmount.toFixed(3)));
     };
 
     const handleChange = (e) => {
