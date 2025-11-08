@@ -50,9 +50,27 @@ const TradeForm = ({ orderSide, marketSymbol, market, position }) => {
             // ✅ decide function based on side
             // - Buy → create long position
             // - Sell → create short position
-            const tx = orderSide === "buy"
-                ? await client.orders.createLongOrder(market.id, sizeUnits, slippagePrice)
-                : await client.orders.createShortOrder(market.id, sizeUnits, slippagePrice);
+            // const tx = orderSide === "buy"
+            //     ? await client.orders.createLongOrder(market.id, sizeUnits, slippagePrice)
+            //     : await client.orders.createShortOrder(market.id, sizeUnits, slippagePrice);
+
+            /*
+             ✅ decide function based on side
+             Using a switch here makes the trade logic easier to extend later.
+             If new order types (like "limit" or "stop-loss") are added, 
+             we can handle them cleanly without nesting multiple ternaries.
+            */
+            let tx;
+            switch (orderSide) {
+                case "buy":
+                    tx = await client.orders.createLongOrder(market.id, sizeUnits, slippagePrice);
+                    break;
+                case "sell":
+                    tx = await client.orders.createShortOrder(market.id, sizeUnits, slippagePrice);
+                    break;
+                default:
+                    throw new Error("Invalid order side");
+            }
 
             // reset form
             setAmount("");
