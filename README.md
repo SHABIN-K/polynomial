@@ -95,3 +95,9 @@ const shortOrder = await sdk.orders.createShortOrder(
 
 - Used **React Query** for data fetching and caching since it automatically handles state, refetching, and data validation.  
    This means we don’t need to manually manage data handling logic, making the setup simpler and more reliable.
+
+### 🧪 Mock Data Note
+
+**position data** is mocked to show how the Positions page works.  
+Real positions only appear after actual trades, but since no real wallet or funds are used here,  
+mock data (`positionMock`) is shown instead when the SDK returns no results.
