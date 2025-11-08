@@ -2,18 +2,18 @@ import clsx from 'clsx'
 import React from 'react'
 import { Link } from 'react-router-dom'
 
-const Stat = ({ label, value, color, align = "start" }) => (
+const Stat = ({ label, value, color, align = "start", hideDollar = false }) => (
     <div className={clsx("flex flex-col text-sm", align === "end" && "items-end")}>
         <span className="text-[12px] font-bold text-gray-400 capitalize">{label}</span>
-        <span className={clsx("font-medium", color)}>{value}</span>
+        <span className={clsx("font-medium", color)}>
+            {!hideDollar && "$"}
+            {value}
+        </span>
     </div>
 );
 
 
 const PositionCard = React.memo(({ position }) => {
-    const isProfit = position.pnl >= 0
-    const pnlColor = isProfit ? "text-green-500" : "text-red-500"
-    
     return (
         <Link to={`/trade/${position.symbol}`}>
             <div className="relative rounded-md mx-2 bg-white text-gray-700 border border-[#1b2230] shadow-sm">
@@ -39,8 +39,8 @@ const PositionCard = React.memo(({ position }) => {
                     <div className="flex items-center gap-3">
                         <div className="text-xs text-gray-400 font-bold">
                             PnL{" "}
-                            <span className={clsx("text-xs", pnlColor)}>
-                                ${position.pnl}
+                            <span className={clsx("text-xs text-green-500")}>
+                                {position.pnlUsd}
                             </span>
                         </div>
 
@@ -52,14 +52,15 @@ const PositionCard = React.memo(({ position }) => {
 
 
                 <div className="grid grid-cols-4 gap-2 p-2.5">
-                    <Stat label="Invested" value={position.investedAmount} color="text-green-400" />
-                    <Stat label="Sold" value={position.sold} />
-                    <Stat label="Remaining" value={position.remaining} />
+                    <Stat label="Invested" value={position.investedAmountUsd} color="text-green-400" />
+                    <Stat label="Mark Price" value={position.markPrice.toPrecision(5)} />
+                    <Stat label="Avg Entry" value={position.avgPrice.toPrecision(5)} />
                     <Stat
                         label="PnL%"
-                        value={position.pnlPercent + "%"}
+                        value={position.pnlPercent.toFixed(2) + "%"}
                         color={position.pnlPercent >= 0 ? "text-green-400" : "text-red-400"}
                         align="end"
+                        hideDollar
                     />
                 </div>
             </div>

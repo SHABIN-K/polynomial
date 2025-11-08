@@ -1,5 +1,10 @@
 import marketMeta from "@/constants/metadata/data.json";
 
+/**
+ * Takes raw posttion data from Polynomial SDK and converts it into a
+ * clean UI-friendly format
+ */
+
 export const normalizePositionData = (p) => {
     const size = BigInt(p.size)
     const avgPrice = BigInt(p.avgEntryPrice)
@@ -23,7 +28,7 @@ export const normalizePositionData = (p) => {
         investedAmountUsd: investedUsd,
         markPrice: Number(markPrice) / 1e18,
         avgPrice: Number(avgPrice) / 1e18,
-        pnlUsd,
+        pnlUsd: pnlUsd ? `$${pnlUsd}` : "-",
         pnlPercent,
     }
 }

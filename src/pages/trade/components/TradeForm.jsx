@@ -30,10 +30,11 @@ const TradeForm = ({ orderSide, marketSymbol, market, position }) => {
             const usdAmount = parseFloat(amount);
             if (!usdAmount || usdAmount <= 0) throw new Error("Enter valid amount");
 
-            // ✅ convert USD → token size
             const sizeUnits = getSizeUnits(usdAmount, market.price);
 
             // ✅ feasibility check
+            // Simulate the trade to check feasibility (margin, size, slippage, etc.)
+            // Prevents placing orders that would fail due to insufficient collateral or invalid size
             const preview = await client.getPostTradeDetails(
                 market.id,
                 sizeUnits.toString(),
@@ -48,6 +49,8 @@ const TradeForm = ({ orderSide, marketSymbol, market, position }) => {
             const slippagePrice = getSlippagePrice(market.price, orderSide);
 
             // ✅ decide function based on side
+            // - Buy → create long position
+            // - Sell → create short position
             const tx = orderSide === "buy"
                 ? await client.orders.createLongOrder(market.id, sizeUnits, slippagePrice)
                 : await client.orders.createShortOrder(market.id, sizeUnits, slippagePrice);
@@ -75,11 +78,13 @@ const TradeForm = ({ orderSide, marketSymbol, market, position }) => {
             return;
         }
 
+        // Convert raw position size (in wei) to USD value based on market price,
+        // then calculate the USD amount for the selected percentage.
         const rawSize = BigInt(position?.size);
         const positionSize = Math.abs(Number(rawSize) / 1e18);
-        const currentValue = positionSize * market.price;  // total USD value of holding
-
+        const currentValue = positionSize * market.price;
         const usdAmount = (currentValue * value) / 100;
+
         setPercentage(value);
         setAmount(Number(usdAmount.toFixed(3)));
     };

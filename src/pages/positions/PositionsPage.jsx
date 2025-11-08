@@ -13,6 +13,8 @@ import { useQuery } from "@tanstack/react-query";
 import { normalizePositionData } from "@/utils/normalizePositionData";
 import QueryErrorMessage from "@/components/QueryErrorMessage";
 
+import position from '../../constants/position.json';
+
 const PositionsPage = () => {
   const { data: positions = [], isLoading, isError, error } = useQuery({
     queryKey: ["positions"],
@@ -25,37 +27,14 @@ const PositionsPage = () => {
     staleTime: 60 * 1000,
   });
 
-  // const dummyPositiodns = {
-  //   "orderType": "DelayedOffchain",
-  //   "accountId": "170141183460469231731687303715884108007",
-  //   "chainId": 8008,
-  //   "marketId": "2000",
-  //   "size": "51088555388265424",
-  //   "totalRealisedFundingUsd": "254341654290967602",
-  //   "totalRealisedPnlUsd": "-79009032330855480747",
-  //   "unrealisedFundingUsd": "-239498641105423737",
-  //   "totalVolumeUsd": "26378374360261323925593",
-  //   "avgEntryPrice": "103498758611820778480448",
-  //   "latestInteractionPrice": "102882667123790192702925",
-  //   "liquidationPrice": "87809817682220860000000",
-  //   "entryTimestamp": 1762383423,
-  //   "breakEvenPriceIncludingClosingFee": "105050446275076008529172",
-  //   "breakEvenPriceExcludingClosingFee": "105048072627060321743777",
-  //   "totalRealisedInterestUsd": "-1576490061020666780",
-  //   "unrealisedInterestUsd": "-409241458278958780",
-  //   "tpsl": null
-  // }
+  const positiones = position?.positions.map(normalizePositionData)
 
-
-  // const positiones = normalizePositionData(dummyPositiodns)
 
   // console.log(positiones)
 
   // ---- Render states ----
   if (isLoading) return <AppLoader />;
-
   if (isError) return <QueryErrorMessage title="Failed to load positions" error={error} />;
-
 
   return (
     <main className="py-16">
@@ -72,7 +51,7 @@ const PositionsPage = () => {
         {dummyPositions.length === 0 ? (
           <EmptyMessage subtitle="You don't have any active positions" />
         ) : (
-          dummyPositions.map((position) => (
+          positiones.map((position) => (
             <PositionCard key={position.id} position={position} />
           ))
         )}
