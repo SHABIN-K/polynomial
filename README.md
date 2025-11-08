@@ -13,46 +13,41 @@ This is a customized private application, designed for personal use and linked t
 
 ## Technologies Used 🛠️
 
-- **React + Vite + js** — Fast and modern frontend setup  
-- **Zustand** — Lightweight state management  
-- **Tailwind CSS** — Utility-first styling framework for clean UI  
-- **React Query** — Data fetching and caching layer  
-- **Polynomial SDK** — Market, pricing, and position data integration  
+- **React + Vite + js** — Fast and modern frontend setup
+- **Zustand** — Lightweight state management
+- **Tailwind CSS** — Utility-first styling framework for clean UI
+- **React Query** — Data fetching and caching layer
+- **Polynomial SDK** — Market, pricing, and position data integration
 - **Farcaster Mini-App Integration** — Optimized frame-based user experience
 
 ---
 
 ## 🏃 Getting Started
 
-### 1. Clone the Repository
-
 ```bash
-# Clone this repository
+# 1. Clone the Repository
   $git clone https://github.com/SHABIN-K/polynomial.git
 
 # Go into the repository
   $cd polynomial
-```
 
-### 2. Configure Environment Variable
+# 2. Configure Environment Variable
 
 Create a .env file in the project root with the following keys
 
-```bash
 VITE_POLYNOMIAL_API_KEY=
 VITE_POLYNOMIAL_SESSION_KEY=
 VITE_POLYNOMIAL_WALLET_ADDRESS=
+
+# 3. Install Dependencies & Run the App
+
+yarn install
+yarn dev
+
+The app will be available at http://localhost:5173
 ```
 
 You can find details on how to generate and fill these values in the official [Polynomial SDK Quick Start Guide](https://github.com/Polynomial-Protocol/polynomial-npm?tab=readme-ov-file#quick-start)
 
-### 3. Install Dependencies & Run the App
 
-```bash
-yarn install
-yarn dev
-```
 
-The app will be available at http://localhost:5173
-
----
