@@ -1,6 +1,24 @@
 # 🌐 Polynomial.fi Farcaster Mini-App
 
-A lightweight **Farcaster Mini-App** built for **Polynomial.fi**, enabling users to view **market data, pricing, open positions**, and perform quick trading actions directly inside Farcaster.
+A lightweight **Farcaster Mini-App** built for **Polynomial.fi**, enabling users to **market data, pricing, open positions**, and perform quick trading actions directly inside Farcaster.
+
+This is a customized private application, designed for personal use and linked to a specific **wallet address via environment configuration**.
+
+## Key Features ✨
+
+- **Market Data View**: Displays live market prices and asset information.
+- **Open Positions**: SShows open positions tied to your configured wallet.
+- **Quick Trading Actions**: Allows instant trade execution directly through your connected wallet session.
+- **Customized Application**: Built specifically for private use, restricted to a single wallet setup.
+
+## Technologies Used 🛠️
+
+- **React + Vite + js** — Fast and modern frontend setup  
+- **Zustand** — Lightweight state management  
+- **Tailwind CSS** — Utility-first styling framework for clean UI  
+- **React Query** — Data fetching and caching layer  
+- **Polynomial SDK** — Market, pricing, and position data integration  
+- **Farcaster Mini-App Integration** — Optimized frame-based user experience
 
 ---
 
@@ -38,5 +56,3 @@ yarn dev
 The app will be available at http://localhost:5173
 
 ---
-
-## 🧩 Architecture Overview
