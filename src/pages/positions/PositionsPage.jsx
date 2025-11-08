@@ -12,12 +12,21 @@ import QueryErrorMessage from "@/components/QueryErrorMessage";
 import { getPolynomialClient } from "@/lib/polynomialfi";
 import { normalizePositionData } from "@/utils/normalizePositionData";
 
+import positionMock from '../../constants/position.json';
+
 const PositionsPage = () => {
   const { data: positions = [], isLoading, isError, error } = useQuery({
     queryKey: ["positions"],
     queryFn: async () => {
       const client = await getPolynomialClient();
       const result = await client.accounts.getPositions();
+
+
+      //for mock position data when no positions are returned from the SDK
+      if (result.length === 0) {
+        console.log("hel")
+        return positionMock?.positions?.map(normalizePositionData)
+      }
       return (result || []).map(normalizePositionData);
     },
     staleTime: 60 * 1000,
