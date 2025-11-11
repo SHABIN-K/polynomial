@@ -10,7 +10,7 @@ const AppLayout = () => {
             <Suspense fallback={<AppLoader />}>
                 <Outlet />
             </Suspense>
-            <Toaster closeButton />
+            <Toaster closeButton position="top-center" />
         </div>
     )
 }

@@ -15,3 +15,26 @@ export const getSizeUnits = (usdAmount, price) => {
     const sizeInToken = usdAmount / price;
     return parseUnits(sizeInToken.toString());
 };
+
+
+export function calcLiquidationPrice(
+    entryPrice,
+    leverage = 1,
+    takerFeeRatio,
+    isLong,
+    maintenanceMarginRate = 0.005
+) {
+    if (!entryPrice || !leverage) return 0;
+
+    if (isLong) {
+        return (
+            (entryPrice * (1 - takerFeeRatio)) /
+            (1 + 1 / leverage - maintenanceMarginRate)
+        );
+    } else {
+        return (
+            (entryPrice * (1 + takerFeeRatio)) /
+            (1 - 1 / leverage + maintenanceMarginRate)
+        );
+    }
+}

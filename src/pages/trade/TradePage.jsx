@@ -28,7 +28,7 @@ const TradePage = () => {
       // get market info
       const raw = await client.markets.getMarketBySymbol(marketSymbol);
 
-      // get user position for that market
+      // get user position
       const summary = await client.accounts.getPositionByMarket(raw.marketId);
 
       return {

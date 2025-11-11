@@ -28,6 +28,7 @@ export const normalizeSingleMarketData = (market) => {
         id: market.marketId,
         symbol: market.symbol,
         price: price,
-        change: change
+        change: change,
+        takerFeeRatio: Number(market.takerFeeRatio) / 1e18
     };
 };

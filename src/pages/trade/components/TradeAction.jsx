@@ -20,7 +20,7 @@ const TradeActions = ({ marketSymbol, orderSide, setOrderSide }) => {
                         />
                         Watchlist
                     </button>
-                    <button className="py-2 bg-white text-gray-700 rounded-lg font-medium flex items-center justify-center gap-1  border border-gray-400">
+                    <button disabled className="py-2 bg-white text-gray-700 rounded-lg font-medium flex items-center justify-center gap-1  border border-gray-400">
                         <Bell className="w-5 h-5" />
                         Alerts
                     </button>

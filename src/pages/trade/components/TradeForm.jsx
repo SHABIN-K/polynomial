@@ -1,9 +1,9 @@
 import clsx from 'clsx';
 import { toast } from 'sonner';
-import React, { useState } from 'react'
+import React, { useMemo, useState } from 'react'
 
 import { getPolynomialClient } from '@/lib/polynomialfi';
-import { getSizeUnits, getSlippagePrice } from '@/utils';
+import { calcLiquidationPrice, getSizeUnits, getSlippagePrice } from '@/utils';
 
 const InfoRow = ({ label, leftText }) => {
     return (
@@ -17,6 +17,7 @@ const InfoRow = ({ label, leftText }) => {
 const TradeForm = ({ orderSide, marketSymbol, market, position }) => {
     const [amount, setAmount] = useState("");
     const [percentage, setPercentage] = useState(null);
+
     const [isSubmitting, setIsSubmitting] = useState(false);
 
     const handleSubmit = async () => {
@@ -58,7 +59,6 @@ const TradeForm = ({ orderSide, marketSymbol, market, position }) => {
              ✅ decide function based on side
              Using a switch here makes the trade logic easier to extend later.
              If new order types (like "limit" or "stop-loss") are added, 
-             we can handle them cleanly without nesting multiple ternaries.
             */
             let tx;
             switch (orderSide) {
@@ -95,7 +95,7 @@ const TradeForm = ({ orderSide, marketSymbol, market, position }) => {
             return;
         }
 
-        // Convert raw position size (in wei) to USD value based on market price,
+        // Convert raw position size to USD value based on market price,
         // then calculate the USD amount for the selected percentage.
         const rawSize = BigInt(position?.size);
         const positionSize = Math.abs(Number(rawSize) / 1e18);
@@ -143,8 +143,8 @@ const TradeForm = ({ orderSide, marketSymbol, market, position }) => {
 
             <div className="space-y-10 bg-white py-2 px-2 rounded-md border-2 border-gray-700 shadow-md">
                 <div className="flex flex-col gap-y-1">
-                    <InfoRow label="Liquidation Price" leftText="$87,804.7" />
-                    <InfoRow label="Order Size" leftText={`$${amount}`} />
+                    <InfoRow label="Liquidation Price" leftText={amount ? "$7,804.7" : "--"} />
+                    <InfoRow label="Order Size" leftText={amount ? `$${amount}` : "--"} />
                     <InfoRow label="Slippage" leftText="Est: 0%" />
                     <InfoRow label="Fees" leftText="0% Fee" />
                 </div>
@@ -155,7 +155,7 @@ const TradeForm = ({ orderSide, marketSymbol, market, position }) => {
                         orderSide === "buy" ? "bg-green-500" : "bg-red-500"
                     )}
                 >
-                    {orderSide === "buy" ? `Buy $${marketSymbol}${amount && `for ${amount}`}` : `Sell $${marketSymbol} ${amount && `for ${amount}`}`}
+                    {orderSide === "buy" ? `Long $${marketSymbol}${amount && `for ${amount}`}` : `Short $${marketSymbol} ${amount && `for ${amount}`}`}
                 </button>
             </div>
 
